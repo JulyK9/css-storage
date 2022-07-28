@@ -1,0 +1,72 @@
+/* original author : https://www.youtube.com/watch?v=BMphVl9suxA&t=1s */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;      /* 높이를 브라우저 높이로 지정 */
+    gap: 30px;             /* flex-direction 방향으로 적용됨 */
+    background-color: #1d2b3a;
+}
+
+.inputBox {
+    position: relative; /* 자식 요소중(inputBox span) 테두리 안에서 위치 정하려고 부모 요소에 정하는 기준 */
+    width: 250px;
+}
+
+.inputBox input {
+    width: 100%; /* 부모인 inputBox에서 설정한 최대 크기로 => 부모와 같은 크기가 됨 */
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: #1d2b3a;
+    border-radius: 5px;
+    outline: none;           /* input 에 클릭시 자동 테두리 효과 없애줌 */
+    color: #fff;
+    font-size: 1em;
+    transition: 0.5s;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 10px;            /* 같은 padding 을 주니까 딱 들어맞음 */
+    pointer-events: none;     /* 기본 커서 옵션들이 비활성화 => 여기서 왜 해주지?? */
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    transition: 0.5s;  /* animation 속도 조절, 적용 위치 확인 */
+}
+
+
+/* input의 required 속성과 연계 => :valid 유효한 입력시 가상 클래스, invalid 무효한 입력시 가상 클래스 */
+.inputBox input:valid ~ span,      /* 유효한 입력이 있을 때 형제요소인 span 모두에 적용 */
+.inputBox input:focus ~ span {     /* 요소에 포커싱 된 동안 형제요소인 span 모두에 적용  */
+    color: #00dfc4;
+    transform: translateX(15px) translateY(-7px);   /* x축 기준 오른쪽으로 10px, y축 기준 위로 7px 이동 */
+    font-size: 0.65em;
+    padding: 0 10px;   /* 왜 위아래 padding을 0을 줘야 딱 맞는걸까? */
+    background-color: #1d2b3a;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+    letter-spacing: 0.1em;
+}
+
+.inputBox:nth-child(2) input:valid ~ span,    /* 2번째 inputBox 요소에 적용 */
+.inputBox:nth-child(2) input:focus ~ span {
+    background-color: #00dfc4;
+    color: #1d2b3a;
+    border-radius: 2px;
+}
+
+.inputBox input:valid,      /* input 자체에다가 테두리 주는 효과 */
+.inputBox input:focus {
+    border: 1px solid #00dfc4;
+}
